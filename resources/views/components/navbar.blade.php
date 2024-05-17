@@ -8,7 +8,7 @@
             <li><a href="#services" class="hover:text-secondary">Services</a></li>
             <li><a href="#about" class="hover:text-secondary">About</a></li>
             <li><a href="#contact" class="hover:text-secondary">Contact</a></li>
-            <li><a href="" class="py-2 px-8 bg-secondary text-dark rounded-full">Login</a></li>
+            <li><a href="" class="py-2 px-8 bg-secondary text-dark rounded-full hover:bg-accent hover:text-primary duration-300 ease-in-out">Login</a></li>
         </ul>
         <svg id="burger" class="block md:hidden z-50" width="50px" height="50px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.048"></g><g id="SVGRepo_iconCarrier"> <g id="Menu / Menu_Alt_01"> <path id="Vector" d="M12 17H19M5 12H19M5 7H19" stroke="#40514E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>
         <div id="burger-menu" class="z-40 absolute top-[-100%] left-0 w-full h-full flex md:hidden justify-center items-center bg-primary duration-500 ease-in-out">
@@ -16,7 +16,7 @@
                 <li><a href="#services" class="hover:text-secondary">Services</a></li>
                 <li><a href="#about" class="hover:text-secondary">About</a></li>
                 <li><a href="#contact" class="hover:text-secondary">Contact</a></li>
-                <li><a href="" class="py-2 px-8 bg-secondary text-dark rounded-full">Login</a></li>
+                <li><a href="" class="py-2 px-8 bg-secondary text-dark rounded-full hover:bg-accent hover:text-primary duration-300 ease-in-out">Login</a></li>
             </ul>
         </div>
     </div>
