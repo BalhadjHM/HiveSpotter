@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.montserrat-thin {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.montserrat-light {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.montserrat-regular {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.montserrat-medium {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.montserrat-semibold {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.montserrat-bold {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.montserrat-extrabold {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+}
+
+.montserrat-black {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+}
+
+#hero-heading::before {
+    content: "";
+    @apply w-96 h-96 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-secondary rounded-full blur-[230px];
+}
+
+#polygon-one{
+    @apply -z-0 absolute -top-[90px] -left-[22%] blur-[0.5px] opacity-60;
+}
+
+#polygon-two{
+    @apply w-14 -z-0 absolute -top-[30] -right-[90] blur-[2px] opacity-60;
+}
+
+#polygon-three{
+    @apply w-24 -z-0 absolute -bottom-[335px] -right-0 blur-[1px] opacity-60;
+}
+
+#about::before {
+    content: url('/public/images/Shape.png');
+    @apply absolute top-[-95px] right-[-200px] opacity-60;
+}
+
+#about::after {
+    content: url('/public/images/Shape2.png');
+    @apply absolute bottom-[-50px] left-[-100px] opacity-60;
+}
