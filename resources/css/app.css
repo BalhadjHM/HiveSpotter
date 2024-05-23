@@ -89,6 +89,30 @@
     @apply absolute bottom-[-50px] left-[-100px] opacity-60;
 }
 
-#contact { ;
+#contact {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgb(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('/public/images/contact-bg.jpg') no-repeat center / cover;
+}
+
+#login {
+    position: relative;
+    z-index: 2; /* Ensure it's above the before and after elements */
+}
+
+#login::before {
+    content: url("/public/images/LoginPolygon.png");
+    position: absolute;
+    top: -80px;
+    left: -70px;
+    z-index: 1; /* Ensure it's behind the login form */
+    @apply hidden sm:block;
+}
+
+#login::after {
+    content: url("/public/images/LoginPolygon-1.png");
+    position: absolute;
+    bottom: -80px;
+    right: -110px;
+    transform: rotate(45deg);
+    z-index: 1; /* Ensure it's behind the login form */
+    @apply hidden sm:block;
 }

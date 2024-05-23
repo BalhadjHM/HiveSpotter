@@ -16,7 +16,7 @@
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div class="flex flex-col justify-start items-start space-y-4">
-                    <h2 class="text-primary montserrat-bold text-lg md:text-xl">Links</h2>
+                    <h2 class="text-primary montserrat-bold text-lg md:text-xl">Sections</h2>
                     <ul class="flex flex-col gap-2">
                         <li><a href="" class="text-white montserrat-medium text-md">About Us</a></li>
                         <li><a href="" class="text-white montserrat-medium text-md">Contact Us</a></li>
