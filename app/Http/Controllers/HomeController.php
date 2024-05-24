@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -22,17 +23,36 @@ class HomeController extends Controller
     public function store(): \Illuminate\Http\RedirectResponse
     {
         //validate the user data
-        $data = request()->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required'
+        request()->validate([
+            'name' => ['required', 'string', 'min:5', 'max:50'],
+            'email' => ['required', 'email', 'unique:users'],
+            'password' => ['required', 'min:8', 'max:20']
+        ], [
+            'name.required' => 'Name is required',
+            'name.min' => 'Name must be at least 5 characters',
+            'name.max' => 'Name must be at most 50 characters',
+            'email.required' => 'Email is required',
+            'email.email' => 'Email is invalid',
+            'email.unique' => 'Email is already taken',
+            'password.required' => 'Password is required',
+            'password.min' => 'Password must be at least 8 characters',
+            'password.max' => 'Password must be at most 20 characters'
         ]);
 
+        //get the user data
+        $name = request('name');
+        $email = request('email');
+        $password = request('password');
+
         //store the user data
-        $user = User::create($data);
+        $user = User::create([
+            'name' => $name,
+            'email' => $email,
+            'password' => bcrypt($password)
+        ]);
 
         //redirect to the home page
-        return redirect()->route('home');
+        return redirect()->route('user.login', ['user' => $user]);
     }
 
     //display the login page
