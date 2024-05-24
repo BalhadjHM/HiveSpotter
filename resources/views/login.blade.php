@@ -9,11 +9,11 @@
             <div id="login" class=" w-full sm:w-[800px] flex flex-col-reverse sm:flex-row justify-center items-stretch bg-white rounded-xl shadow-md">
                 <div class="w-full h-full py-12 px-8 sm:basis-1/2">
                     <h1 class="mb-8 text-2xl sm:text-3xl text-dark montserrat-bold">Login</h1>
-                    <form action="" method="post" class="space-y-4">
+                    <form action="{{ route('user.authenticate') }}" method="post" class="space-y-4">
                         @csrf
                         <div class="flex flex-col justify-center items-start gap-1 text-dark">
-                            <label for="name" class="text-md montserrat-semibold">Username</label>
-                            <input type="text" name="name" id="name" class="w-full py-1 px-2  border-2 border-accent rounded-md focus:ring-0 focus:outline-0">
+                            <label for="email" class="text-md montserrat-semibold">Email</label>
+                            <input type="email" name="email" id="email" class="w-full py-1 px-2  border-2 border-accent rounded-md focus:ring-0 focus:outline-0" value="{{ old('email') }}">
                         </div>
                         <div class="flex flex-col justify-center items-start gap-1">
                             <label for="password" class="text-md montserrat-semibold">Password</label>

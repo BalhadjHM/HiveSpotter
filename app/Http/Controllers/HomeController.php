@@ -45,20 +45,52 @@ class HomeController extends Controller
         $password = request('password');
 
         //store the user data
-        $user = User::create([
+        User::create([
             'name' => $name,
             'email' => $email,
             'password' => bcrypt($password)
         ]);
 
         //redirect to the home page
-        return redirect()->route('user.login', ['user' => $user]);
+        return redirect()->route('user.login')->with(['success' => 'You have successfully created an account'])->withInput();
     }
 
     //display the login page
     public function login(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('login');
+    }
+
+    // authenticate the user
+    public function authenticate(){
+        // validate the user data
+        request()->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required']
+        ], [
+            'email.required' => 'Email is required',
+            'email.email' => 'Email is invalid',
+            'password.required' => 'Password is required'
+        ]);
+
+        // get the user data
+        $email = request('email');
+        $password = request('password');
+
+        // check if the user exists
+        $user = User::where('email', $email)->first();
+        if(!$user){
+            return redirect()->route('user.login')->with(['error' => 'Invalid email or password'])->withInput();
+        }
+
+        // authenticate the user
+        if(auth()->attempt(['email' => $email, 'password' => $password])){
+            // redirect to the home page
+            return redirect()->route('home')->with(['success' => 'You are logged in']);
+        }else{
+            // redirect to the login page
+            return redirect()->route('user.login')->with(['error' => 'Invalid email or password'])->withInput();
+        }
     }
 
 }
