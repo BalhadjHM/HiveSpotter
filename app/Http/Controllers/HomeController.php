@@ -55,6 +55,12 @@ class HomeController extends Controller
         return redirect()->route('user.login')->with('success', 'You have successfully created an account')->withInput();
     }
 
+    //display the verification page
+    public function verification(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('verification');
+    }
+
     //display the login page
     public function login(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {

@@ -10,5 +10,6 @@ use App\Http\Controllers\WebsiteController;
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/signup' , [HomeController::class, 'signup'])->name('user.signup');
 Route::post('/signup', [HomeController::class, 'store'])->name('user.store');
+Route::get('/verification', [HomeController::class, 'verification'])->name('user.verification');
 Route::get('/login', [HomeController::class, 'login'])->name('user.login');
 Route::post('/login' , [HomeController::class , 'authenticate'])->name('user.authenticate');

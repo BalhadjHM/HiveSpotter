@@ -1,7 +1,7 @@
 <x-layout.app>
 
     <x-slot name="title">
-        HiveSpotter | Login
+        HiveSpotter | Sign Up
     </x-slot>
 
     <x-slot name="content">
@@ -16,7 +16,7 @@
             </div>
         @endif
         <main class="h-full w-full bg-primary flex items-center justify-center overflow-hidden">
-            <div id="login" class=" w-full sm:w-[800px] flex flex-col-reverse sm:flex-row justify-center items-stretch bg-white rounded-xl shadow-md">
+            <div id="login" class="w-full sm:w-[800px] flex flex-col-reverse sm:flex-row justify-center items-stretch bg-white rounded-xl shadow-md">
                 <div class="w-full h-full py-12 px-8 sm:basis-1/2">
                     <h1 class="mb-8 text-2xl sm:text-3xl text-dark montserrat-bold">Register</h1>
                     <form action="{{ route('user.store') }}" method="post" class="space-y-4">
