@@ -20,13 +20,13 @@ class HomeController extends Controller
     }
 
     //store the user data
-    public function store(): \Illuminate\Http\RedirectResponse
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         //validate the user data
         request()->validate([
             'name' => ['required', 'string', 'min:5', 'max:50'],
-            'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'min:8', 'max:20']
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'string', 'min:8', 'max:20']
         ], [
             'name.required' => 'Name is required',
             'name.min' => 'Name must be at least 5 characters',
@@ -52,7 +52,7 @@ class HomeController extends Controller
         ]);
 
         //redirect to the home page
-        return redirect()->route('user.login')->with(['success' => 'You have successfully created an account'])->withInput();
+        return redirect()->route('user.login')->with('success', 'You have successfully created an account')->withInput();
     }
 
     //display the login page
@@ -62,7 +62,7 @@ class HomeController extends Controller
     }
 
     // authenticate the user
-    public function authenticate(){
+    public function authenticate(Request $request){
         // validate the user data
         request()->validate([
             'email' => ['required', 'email'],
@@ -77,19 +77,15 @@ class HomeController extends Controller
         $email = request('email');
         $password = request('password');
 
-        // check if the user exists
-        $user = User::where('email', $email)->first();
-        if(!$user){
-            return redirect()->route('user.login')->with(['error' => 'Invalid email or password'])->withInput();
-        }
-
         // authenticate the user
         if(auth()->attempt(['email' => $email, 'password' => $password])){
-            // redirect to the home page
-            return redirect()->route('home')->with(['success' => 'You are logged in']);
+            // Authentication passed, regenerate session
+            $request->session()->regenerate();
+            // Redirect to the home page with a success message
+            return redirect()->route('home')->with('success', 'You are logged in');
         }else{
             // redirect to the login page
-            return redirect()->route('user.login')->with(['error' => 'Invalid email or password'])->withInput();
+            return redirect()->route('user.login')->withErrors(['email' => 'Invalid email or password'])->withInput();
         }
     }
 

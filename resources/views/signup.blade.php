@@ -5,6 +5,16 @@
     </x-slot>
 
     <x-slot name="content">
+        @if ($errors->any())
+            <div id="error-notification" class="fixed top-[5%] left-1/2 transform -translate-x-1/2 -translate-y-full bg-red-50 py-2 px-8 rounded-xl border-red-600 border shadow-md transition-all duration-500 ease-in-out opacity-0 z-50">
+                <h2 class="mb-1 text-lg text-center text-red-600 montserrat-bold ">Error</h2>
+                <ul class="text-red-600 text-left list-disc list-inside montserrat-medium text-sm">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <main class="h-full w-full bg-primary flex items-center justify-center overflow-hidden">
             <div id="login" class=" w-full sm:w-[800px] flex flex-col-reverse sm:flex-row justify-center items-stretch bg-white rounded-xl shadow-md">
                 <div class="w-full h-full py-12 px-8 sm:basis-1/2">
@@ -13,15 +23,15 @@
                         @csrf
                         <div class="flex flex-col justify-center items-start gap-1 text-dark">
                             <label for="name" class="text-md montserrat-semibold">Username</label>
-                            <input type="text" name="name" id="name" class="w-full py-1 px-2  border-2 border-accent rounded-md focus:ring-0 focus:outline-0" value="{{ old('name') }}">
+                            <input type="text" name="name" id="name" class="w-full py-2 px-2  border-2 border-accent rounded-md focus:ring-0 focus:outline-0 montserrat-medium" value="{{ old('name') }}">
                         </div>
                         <div class="flex flex-col justify-center items-start gap-1">
                             <label for="email" class="text-md montserrat-semibold">email</label>
-                            <input type="email" name="email" id="email" class="w-full py-1 px-2  border-2 border-accent rounded-md focus:ring-0 focus:outline-0" value="{{ old('email') }}">
+                            <input type="email" name="email" id="email" class="w-full py-2 px-2  border-2 border-accent rounded-md focus:ring-0 focus:outline-0 montserrat-medium" value="{{ old('email') }}">
                         </div>
                         <div class="flex flex-col justify-center items-start gap-1">
                             <label for="password" class="text-md montserrat-semibold">Password</label>
-                            <input type="password" name="password" id="password" class="w-full py-1 px-2  border-2 border-accent rounded-md focus:ring-0 focus:outline-0">
+                            <input type="password" name="password" id="password" class="w-full py-2 px-2  border-2 border-accent rounded-md focus:ring-0 focus:outline-0 montserrat-medium">
                         </div>
                         <div class="flex flex-col justify-center items-start text-sm text-dark montserrat-medium">
                             <a href="{{ route('user.login') }}" class="hover:text-accent">Already have an account</a>
@@ -56,3 +66,34 @@
 
 </x-layout.app>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Function to close the error notification
+        function closeErrorNotification() {
+            let error = document.getElementById('error-notification');
+            error.classList.add('-translate-y-full', 'opacity-0');
+            error.classList.remove('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                error.style.display = 'none';
+            }, 500);
+        }
+
+        // Function to show the error notification
+        function showErrorNotification() {
+            let error = document.getElementById('error-notification');
+            error.style.display = 'block';
+            setTimeout(() => {
+                error.classList.remove('-translate-y-full', 'opacity-0');
+                error.classList.add('translate-y-0', 'opacity-100');
+            }, 500);
+        }
+
+        // Triggering the error notification
+        @if ($errors->any())
+            showErrorNotification();
+            setTimeout(() => {
+                closeErrorNotification();
+            }, 4000); // Adjust the time as needed
+        @endif
+    });
+</script>

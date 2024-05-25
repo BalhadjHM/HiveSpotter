@@ -1,4 +1,4 @@
-<nav {{ $attributes->merge(['class' => 'bg-primary shadow']) }}>
+<nav {{ $attributes->merge(['class' => 'bg-primary shadow z-50 md:sticky md:top-0']) }}>
     <div class="py-2 sm:py-3 px-6 lg:px-28 container mx-auto flex justify-between items-center">
         <a href="{{ route('home') }}" class="z-50">
             <img src="{{ asset('images/HiveSpotter.png') }}" alt="logo" class="h-12 hidden sm:block">
