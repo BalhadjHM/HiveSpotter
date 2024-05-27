@@ -13,3 +13,7 @@ Route::post('/signup', [HomeController::class, 'store'])->name('user.store');
 Route::get('/verification', [HomeController::class, 'verification'])->name('user.verification');
 Route::get('/login', [HomeController::class, 'login'])->name('user.login');
 Route::post('/login' , [HomeController::class , 'authenticate'])->name('user.authenticate');
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('user.dashboard');
+
+Route::get('/dashboard/index', [WebsiteController::class, 'index'])->name('dashboard.index');
+

@@ -88,11 +88,17 @@ class HomeController extends Controller
             // Authentication passed, regenerate session
             $request->session()->regenerate();
             // Redirect to the home page with a success message
-            return redirect()->route('home')->with('success', 'You are logged in');
+            return redirect()->route('user.dashboard')->with('success', 'You are logged in');
         }else{
             // redirect to the login page
             return redirect()->route('user.login')->withErrors(['email' => 'Invalid email or password'])->withInput();
         }
+    }
+
+    // display the dashboard
+    public function dashboard(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('dashboard.about');
     }
 
 }
