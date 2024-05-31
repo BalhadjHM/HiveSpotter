@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -44,21 +46,55 @@ class HomeController extends Controller
         $email = request('email');
         $password = request('password');
 
-        //store the user data
-        User::create([
+        //generate the OTP
+        $otp = rand(100000, 999999);
+
+        //store the OTP in session or database
+        Session::put('otp', $otp);
+        Session::put('email', $email);
+
+        //send the OTP via email
+        Mail::raw("Your verification code is: $otp", function ($message) use ($email) {
+            $message->to($email)
+                ->subject('OTP Verification Code');
+        });
+
+        //store the user data temporarily in session
+        Session::put('user_data', [
             'name' => $name,
             'email' => $email,
             'password' => bcrypt($password)
         ]);
 
-        //redirect to the home page
-        return redirect()->route('user.login')->with('success', 'You have successfully created an account')->withInput();
+        //redirect to the verification page
+        return redirect()->route('user.verification');
     }
 
     //display the verification page
     public function verification(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('verification');
+    }
+
+    //verify the OTP
+    public function verify(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        $otp = implode('', $request->input('code')); // join the array of digits
+        $sessionOtp = Session::get('otp');
+        $userData = Session::get('user_data');
+
+        if ($otp == $sessionOtp) {
+            // OTP is correct, create the user
+            User::create($userData);
+
+            // Clear session data
+            Session::forget(['otp', 'user_data', 'email']);
+
+            // Redirect or show a success message
+            return redirect()->route('user.login')->with('success', 'Account created successfully!');
+        } else {
+            return redirect()->route('user.verification')->withErrors(['code' => 'The verification code is incorrect.']);
+        }
     }
 
     //display the login page
