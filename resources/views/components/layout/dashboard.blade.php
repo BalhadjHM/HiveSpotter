@@ -1,3 +1,7 @@
+@php
+    use Illuminate\Support\Facades\Auth;
+    $userId = Auth::id();
+@endphp
 
 <div class="min-h-screen flex">
     {{-- Sidebar --}}
