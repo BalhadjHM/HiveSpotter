@@ -16,4 +16,7 @@ Route::post('/login' , [HomeController::class , 'authenticate'])->name('user.aut
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('user.dashboard');
 
 Route::get('/dashboard/index', [WebsiteController::class, 'index'])->name('dashboard.index');
+Route::get('/dashboard/tracker', [WebsiteController::class, 'tracker'])->name('dashboard.tracker');
+Route::get('/dashboard/tracker/add', [WebsiteController::class, 'addTracker'])->name('dashboard.addTracker');
+Route::get('/dashboard/tracker/edit', [WebsiteController::class, 'editTracker'])->name('dashboard.editTracker');
 

@@ -5,7 +5,7 @@
 
     <x-slot name="content">
         {{--    Navbar    --}}
-        <x-navbar/>
+        <x-navbar-two/>
         <x-layout.dashboard>
             <x-slot name="title">
                 Dashboard Overview
