@@ -34,20 +34,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Js for component dropdown.blade.php
 document.addEventListener('DOMContentLoaded', () => {
     // Dropdown functionality
-    const dropdown = document.querySelector('#drop-down');
-    const dropdownMenu = document.querySelector('#drop-menu');
+    const dropdowns = document.querySelectorAll('.drop-down');
+    const dropdownMenus = document.querySelectorAll('.drop-menu');
 
-    dropdown.addEventListener('click', () => {
-        dropdownMenu.classList.toggle('show');
+    dropdowns.forEach((dropdown, index) => {
+        dropdown.addEventListener('click', () => {
+            dropdownMenus[index].classList.toggle('show');
+        });
     });
 
     document.addEventListener('click', (e) => {
-        if (!dropdown.contains(e.target)) {
-            dropdownMenu.classList.remove('show');
-        }
+        dropdowns.forEach((dropdown, index) => {
+            if (!dropdown.contains(e.target)) {
+                dropdownMenus[index].classList.remove('show');
+            }
+        });
     });
 });
 
